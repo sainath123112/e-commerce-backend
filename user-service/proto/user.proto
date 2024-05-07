@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package proto; 
+
+option go_package = "./proto";
+
+service UserService {
+    rpc GetUserExist(GetUserRequest) returns (GetUserResponse) {}
+    rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse) {}
+    rpc GetUserNameFromToken(UserNameFromTokenRequest) returns (UserNameFromTokenResponse) {}
+    rpc GetUserNameFromUserId(UserNameFromUserIdRequest) returns (UserNameFromUserIdResponse) {}
+}
+
+message GetUserRequest {
+    string Id = 1;
+}
+message GetUserResponse {
+    bool IsExist = 1;
+}
+
+message ValidateTokenRequest {
+    string Token = 1;
+}
+
+message ValidateTokenResponse {
+    bool IsTokenValid = 1;
+}
+
+message UserNameFromTokenRequest {
+    string Token = 1;
+}
+
+message UserNameFromTokenResponse {
+    string EmailFromToken = 1;
+}
+
+message UserNameFromUserIdRequest {
+    string UserId = 1;
+}
+
+message UserNameFromUserIdResponse {
+    string EmailFromUserId = 1;
+}
+
+
+

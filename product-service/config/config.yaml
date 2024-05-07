@@ -1,0 +1,7 @@
+product-service:
+  server: 
+    port: 8081
+  database:
+    uri: mongodb+srv://sainatht31:Saishriya1231@sainath.ltaacon.mongodb.net/?retryWrites=true&w=majority&appName=sainath
+    database-name: product_service
+    collection-name: products

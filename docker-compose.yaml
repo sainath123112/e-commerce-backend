@@ -1,0 +1,46 @@
+version: '2.24'
+services:
+  e-commerce-user-service:
+    image: user-service:1.0
+    ports:
+      - "8082:8082"
+    container_name: e-commerce-user-service
+    depends_on:
+      e-commerce-postgres:
+        condition: service_healthy
+    networks:
+      - mynetwork
+
+  e-commerce-product-service:
+    image: product-service:1.0
+    container_name: e-commerce-product-service
+    ports:
+      - "8081:8081"
+    networks:
+      - mynetwork
+
+  e-commerce-postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    container_name: e-commerce-postgres
+    environment:
+      - POSTGRES_PASSWORD=Sainath1231
+      - POSTGRES_USER=sainath
+      - POSTGRES_DB=user_service
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sainath"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    external: true
+
+networks:
+  mynetwork:

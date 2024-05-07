@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "./proto";
+
+service ProductService {
+    rpc ValidateProduct(ValidateProductRequest) returns (ValidateProductResponse) {}
+}
+
+message ValidateProductRequest {
+    string ProductId = 1;
+}
+message ValidateProductResponse {
+    bool IsProductValid = 1;
+}
